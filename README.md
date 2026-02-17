@@ -1,6 +1,8 @@
+**Overview**
 This is an interactive dummy settings menu using material 3 components, composable functions, and states. Modifiers are used to make every row in this settings menu fit the screen and look pretty.
 Each interactable settings composable utilizes state to change values on click. 
 
+**Components and Modifiers Used**
 Material 3 Components Used:
 1. TopAppBar
 2. SnackBar
@@ -25,4 +27,11 @@ Interactable Settings:
 4. CheckBox
 5. Radio Buttons
 Divider featured between all of these
+
+**AI Disclosure**
+AI was only used to advise on modifier settings. For example, I did not know the appropriate times to use the align modifier versus the verticalAlignment, or horizontalAlignment parameters. Or for debugging after I already implemented a material3 component. For example, I implemented snackbar the same way it was shown on the Android Dev examples, however I forgot to mount the hostState to my Scaffold composable, meaning that even when the snackbar was triggered on a Switch change, it had no where to display. This made explaining new concepts in a brief amount of time easier.
+
+**Screenshots**
+![Indiv3Q1](https://github.com/user-attachments/assets/aa452f70-06cd-42fb-bbcb-adb0685e124f)
+![Indiv3Q1-2](https://github.com/user-attachments/assets/d8e538f9-5278-4ab7-b62c-22f122182e25)
 
