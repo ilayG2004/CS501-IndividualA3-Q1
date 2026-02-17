@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -33,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -98,11 +102,11 @@ fun SettingScreen(modifier: Modifier = Modifier) {
     ) { paddingValues ->
         // The actual interactable content of our settings screen
         Column(
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues).background(color= MaterialTheme.colorScheme.background)
         ) {
 
             // This switch will trigger our Snackbar
-            SettingRow(label = "Low Power", supportText = "Limits CPU usage to save power", modifier=modifier) {
+            SettingRow(label = "Low Power", supportText = "Limits CPU usage to save power") {
                 Switch(
                     checked=checked,
                     onCheckedChange = {
@@ -117,7 +121,7 @@ fun SettingScreen(modifier: Modifier = Modifier) {
             }
             //Dividers between every setting item
             HorizontalDivider(thickness = 2.dp)
-            SettingRow( "Volume", "Adjust volume output", modifier=modifier) {
+            SettingRow( "Volume", "Adjust volume output", modifier = modifier) {
                 Slider(
                     value = sliderPos,
                     onValueChange = {sliderPos = it},
@@ -127,7 +131,7 @@ fun SettingScreen(modifier: Modifier = Modifier) {
             /*SettingRow(DatePicker(), "Date", "Adjust system date")*/
             //TextField component
             HorizontalDivider(thickness = 2.dp)
-            SettingRow("Device Name", "Change device name", modifier=modifier) {
+            SettingRow("Device Name", "Change device name") {
                 TextField(
                     value = deviceName,
                     onValueChange = { deviceName = it }
@@ -145,14 +149,14 @@ fun SettingScreen(modifier: Modifier = Modifier) {
                             checked = checkBoxStates[index],
                             onCheckedChange = {checkBoxStates[index] = it}
                         )
-                        Text(text=option)
+                        Text(text=option, modifier= Modifier.align(Alignment.CenterVertically))
                     }
                 }}
             }
 
             //Radio button components laid out dyna ically in a column where each radio button has its own row
             HorizontalDivider(thickness = 2.dp)
-            SettingRow("Do Not Disturb Priority", "Allows calls to go through when on DND.", modifier = modifier) {
+            SettingRow("Do Not Disturb Priority", "Allows calls to go through when on DND.") {
                 Column {
                     radioOptions.forEach { option ->
                         Row(
@@ -162,7 +166,7 @@ fun SettingScreen(modifier: Modifier = Modifier) {
                                 selected = (option == selectedRadio),
                                 onClick = { selectedRadio = option }
                             )
-                            Text(text = option)
+                            Text(text = option, modifier= Modifier.align(Alignment.CenterVertically))
                         }
                     }
                 }
@@ -182,7 +186,8 @@ fun SettingRow(label: String, supportText: String, modifier: Modifier =Modifier,
     Row(
         modifier = modifier
             .padding(10.dp)
-            .fillMaxWidth(), //Let each row take up whole screen width, besides the padding around it
+            .fillMaxWidth() //Let each row take up whole screen width, besides the padding around it
+            .heightIn(min = 30.dp, max = 200.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         // LEFT: Text Column — take 50% of available width
